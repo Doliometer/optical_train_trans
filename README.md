@@ -18,11 +18,16 @@ where
 predicted e-/s = ∫ F_λ(λ) · A_tel · T_atm(λ) · QE(λ) · T_filter(λ) dλ
 ```
 
-`F_λ` is taken from the Gaia DR3 XP sampled spectrum (336–1020 nm, 2 nm
-steps, directly flux-calibrated) where available, falling back to a Planck
-blackbody normalised to the Gaia G magnitude otherwise.  `T_tel` absorbs
-all throughput not otherwise accounted for: mirror reflectivities, spider
-obscuration losses, relay optics, and any vignetting.
+| Term | Units | Description |
+|---|---|---|
+| `F_λ(λ)` | ph/s/m²/nm | Photon flux density at the top of atmosphere. Taken from the Gaia DR3 XP sampled spectrum (336–1020 nm, 2 nm steps, directly flux-calibrated) where available; otherwise a Planck blackbody normalised to the Gaia G magnitude. |
+| `A_tel` | m² | Effective collecting area of the primary mirror, minus the secondary obstruction (π/4 × (2.54² − 0.36²) ≈ 4.96 m²). |
+| `T_atm(λ)` | — | Atmospheric transmission. Analytic model combining Rayleigh scattering (scaled for MWO altitude 1740 m), grey aerosol, and the Chappuis ozone band (~600 nm). |
+| `QE(λ)` | — | Detector quantum efficiency of the ZWO ASI585MM Pro, digitised from the manufacturer's published curve. |
+| `T_filter(λ)` | — | Filter transmission, digitised from Baader manufacturer curves (UV/IR-cut L or 685 IR-pass). |
+
+`T_tel` absorbs all throughput not otherwise accounted for: mirror
+reflectivities, spider obscuration losses, relay optics, and any vignetting.
 
 ## Optical train
 
