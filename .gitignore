@@ -6,3 +6,4 @@ __pycache__/
 
 # Raw manufacturer spec images (large, not version-controlled)
 *.webp
+gdr3_*.ecsv
