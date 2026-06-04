@@ -1,0 +1,8 @@
+# Data directories — large FITS frame sets, available on project server
+G2P*/
+_c1_ref_*/
+bias_frames/
+__pycache__/
+
+# Raw manufacturer spec images (large, not version-controlled)
+*.webp
