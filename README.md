@@ -55,9 +55,12 @@ Plate scale: 18.63 mas/px · Frame size: 1024 × 1024
 | Baader UV/IR-cut L | 400–710 nm | 8 | 0.480 | 0.479 ± 0.013 |
 | Baader 685 IR-pass | 685–1050 nm | 10 | 0.314 | 0.316 ± 0.008 |
 
-\* EGAIN derived from T_tel self-consistency (luminance band) and read noise
-from bias frame pairs (28.4 ADU → ~1.6 e-), consistent with HCG at gain 252.
-Pending confirmation by photon transfer curve from flat-field pairs.
+\* The camera stores 12-bit ADC values left-shifted by 4 bits into 16-bit FITS
+pixels (all stored values are multiples of 16; bias pedestal ~80 stored ADU =
+5 true ADU).  EGAIN = 0.057 e-/stored ADU corresponds to **0.91 e-/true 12-bit
+ADU**, consistent with the HCG plateau on the ZWO spec chart.  Derived from
+T_tel self-consistency (luminance median → 0.480 in expected range).  Pending
+confirmation by photon transfer curve from flat-field pairs.
 
 The lower IR transmissivity is expected: aged aluminium reflectivity declines
 in the near-IR.

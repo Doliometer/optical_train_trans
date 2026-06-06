@@ -65,9 +65,20 @@ T_TEL_HI = R_AL_PRIMARY * R_AL_AGED_HI**N_AL_AGED * R_AG * T_LENS_HI
 #   EGAIN(chart) ≈ 0.30 e-/ADU
 #   full-well     ≈ 1050 e-  →  EGAIN = 1050/4095 ≈ 0.256 e-/ADU
 # Best estimate: 0.28 e-/ADU (midpoint).  Header value appears to be incorrect.
-EGAIN = 0.057  # e-/ADU  (derived from T_tel self-consistency: bias RN=28.4 ADU
-               #           × EGAIN → ~1.6 e- RN, consistent with HCG at gain=252;
-               #           ZWO spec chart is unreadable in this regime)
+# The ZWO ASI585MM Pro records 12-bit ADC values left-shifted by 4 bits into
+# 16-bit FITS pixels (all stored values are multiples of 16).  The pipeline
+# works entirely in stored 16-bit ADU throughout (sky subtraction removes the
+# bias pedestal of ~80 stored ADU = 5 true ADU), so EGAIN is expressed in the
+# same stored units.
+#
+# Stored EGAIN = 0.057 e-/stored ADU
+# True EGAIN   = 0.057 × 16 = 0.91 e-/true 12-bit ADU  (consistent with HCG
+#                at gain=252 on the ZWO spec chart)
+#
+# Derived from T_tel self-consistency: luminance-band median T_tel = 0.480
+# with EGAIN=0.057 falls squarely in the expected 0.43–0.57 range.
+# Pending confirmation by photon transfer curve from flat-field pairs.
+EGAIN = 0.057  # e-/stored 16-bit ADU
 
 # Plate scale
 PLATE_SCALE_MAS = 18.63     # mas/pixel
