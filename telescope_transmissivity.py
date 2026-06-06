@@ -359,9 +359,16 @@ def fit_fwhm_moffat(stack, cx, cy, ny, nx, beta=3.0, r_fit_max=200):
     yy, xx  = np.ogrid[:ny, :nx]
     r_grid  = np.sqrt((xx - cx)**2 + (yy - cy)**2)
 
+    # Cap r_fit_max to well inside the pad-safe radius so the sky annulus
+    # and fit region never extend into zero-padded border pixels.
+    margin = int(min(cx, nx - cx, cy, ny - cy))
+    r_fit_max = min(r_fit_max, margin - 60)
+    if r_fit_max < 20:
+        return None
+
     # Sky from annulus just beyond the fit region (avoid zero-pad border)
     sky_lo  = r_fit_max + 10
-    sky_hi  = min(r_fit_max + 50, int(min(cx, nx - cx, cy, ny - cy)) - 5)
+    sky_hi  = min(r_fit_max + 50, margin - 5)
     sky_mask = (r_grid > sky_lo) & (r_grid <= sky_hi)
     sky = np.median(stack[sky_mask]) if sky_mask.sum() >= 20 else 0.0
 
