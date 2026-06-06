@@ -46,17 +46,30 @@ A_TEL = np.pi / 4.0 * (D_PRIMARY**2 - D_SECONDARY**2)  # m²
 # Optical train: mirror/lens budget for T_tel sanity check
 # 6 mirrors total: primary (Al, recently recoated) + 4 more Al + 1 Ag fold
 # 1 relay refractor lens
-# Set R_AL_PRIMARY = R_AL_AGED until confirmed recoated.
-R_AL_PRIMARY = 0.91   # recently recoated Al (optimistic: 0.91, conservative: 0.87)
-R_AL_AGED_LO = 0.85   # aged Al mirror, conservative
-R_AL_AGED_HI = 0.90   # aged Al mirror, optimistic
-R_AG         = 0.98   # Ag fold mirror before camera (manufacturer spec)
-T_LENS_LO    = 0.92   # relay lens, uncoated or single-layer AR
-T_LENS_HI    = 0.97   # relay lens, good broadband AR coating
 N_AL_AGED    = 4      # secondary + tertiary + 2 relay tube mirrors
+R_AG         = 0.98   # Ag fold mirror before camera (manufacturer spec)
+
+# Visible (400–710 nm) Al reflectivities
+R_AL_PRIMARY     = 0.91   # recently recoated Al (optimistic: 0.91, conservative: 0.87)
+R_AL_AGED_LO     = 0.85   # aged Al mirror, conservative
+R_AL_AGED_HI     = 0.90   # aged Al mirror, optimistic
+T_LENS_LO        = 0.92   # relay lens, uncoated or single-layer AR
+T_LENS_HI        = 0.97   # relay lens, good broadband AR coating
 
 T_TEL_LO = R_AL_PRIMARY * R_AL_AGED_LO**N_AL_AGED * R_AG * T_LENS_LO
 T_TEL_HI = R_AL_PRIMARY * R_AL_AGED_HI**N_AL_AGED * R_AG * T_LENS_HI
+
+# IR (685–1050 nm) Al reflectivities — Al reflectivity declines significantly
+# in the near-IR (Rakić 1995 and telescope coating literature):
+#   fresh Al:  ~87% at 700 nm, ~84% at 800 nm, ~80% at 1000 nm → ~84% effective
+#   aged Al:   subtract ~3–6% from fresh values → ~78–81% effective
+# Ag fold mirror is spectrally flat (~98%) across this range.
+R_AL_PRIMARY_IR  = 0.84   # fresh Al primary, ~850 nm effective wavelength
+R_AL_AGED_IR_LO  = 0.78   # aged Al, conservative
+R_AL_AGED_IR_HI  = 0.83   # aged Al, optimistic
+
+T_TEL_IR_LO = R_AL_PRIMARY_IR * R_AL_AGED_IR_LO**N_AL_AGED * R_AG * T_LENS_LO
+T_TEL_IR_HI = R_AL_PRIMARY_IR * R_AL_AGED_IR_HI**N_AL_AGED * R_AG * T_LENS_HI
 
 # Camera
 # EGAIN: header reports 0.5166 e-/ADU, which matches the ZWO chart at gain~195 (0.1dB units).

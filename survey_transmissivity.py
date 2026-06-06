@@ -29,7 +29,7 @@ Gaia.ROW_LIMIT = -1
 
 from flux_estimate import photon_flux_density, xp_photon_flux_density
 from telescope_transmissivity import (
-    A_TEL, EGAIN, T_TEL_LO, T_TEL_HI, N_AL_AGED,
+    A_TEL, EGAIN, T_TEL_LO, T_TEL_HI, T_TEL_IR_LO, T_TEL_IR_HI, N_AL_AGED,
     qe_asi585, filter_transmission, atmospheric_transmission,
     pad_aware_photometry,
 )
@@ -306,8 +306,10 @@ def main():
         return
 
     print('-' * 90)
-    print(f'\n  Expected T_tel: {T_TEL_LO:.3f} – {T_TEL_HI:.3f}  '
+    print(f'\n  Expected T_tel (luminance, 400–710 nm): {T_TEL_LO:.3f} – {T_TEL_HI:.3f}  '
           f'(1×Al fresh + {N_AL_AGED}×Al aged + 1×Ag + lens)')
+    print(f'  Expected T_tel (IR longpass, 685–1050 nm): {T_TEL_IR_LO:.3f} – {T_TEL_IR_HI:.3f}  '
+          f'(Al reflectivity from Rakić 1995)')
 
     target_t = 0.50
     for fname in FILTER_CONFIG:
