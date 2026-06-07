@@ -54,25 +54,27 @@ Al reflectivity declines significantly in the near-IR, driving the lower expecte
 
 ## Results (2025-10-16)
 
-Camera: ZWO ASI585MM Pro · GAIN = 252 (HCG mode) · EGAIN = 0.057 e-/ADU\*
-Plate scale: 18.63 mas/px · Frame size: 1024 × 1024
+Camera: ZWO ASI585MM Pro · GAIN = 252 (HCG mode) · EGAIN = 0.057 e-/stored ADU\*
+Plate scale: 18.63 mas/px · Frame size: 1024 × 1024 · 1000 frames/star/filter
 
-| Filter | Bandpass | n stars | T_tel (median) | T_tel (mean ± std) |
-|---|---|---|---|---|
-| Baader UV/IR-cut L | 400–710 nm | 8 | 0.480 | 0.479 ± 0.013 |
-| Baader 685 IR-pass | 685–1050 nm | 10 | 0.314 | 0.316 ± 0.008 |
+| Filter | Bandpass | Expected T_tel | n stars | T_tel (median) | T_tel (mean ± std) |
+|---|---|---|---|---|---|
+| Baader UV/IR-cut L | 400–710 nm | 0.43 – 0.57 | 4 | 0.471 | 0.472 ± 0.007 |
+| Baader 685 IR-pass | 685–1050 nm | 0.28 – 0.38 | 7 | 0.312 | 0.313 ± 0.008 |
+
+Both results fall within their respective expected ranges. Full output in
+`survey_results.txt`. Runtime: ~81 minutes.
 
 \* The camera stores 12-bit ADC values left-shifted by 4 bits into 16-bit FITS
-pixels (all stored values are multiples of 16; bias pedestal ~80 stored ADU =
-5 true ADU).  EGAIN = 0.057 e-/stored ADU corresponds to **0.91 e-/true 12-bit
-ADU**, consistent with the HCG plateau on the ZWO spec chart.  Derived from
-T_tel self-consistency (luminance median → 0.480 in expected range).  Pending
-confirmation by photon transfer curve from flat-field pairs.
+pixels (bias pedestal ~80 stored ADU = 5 true ADU). EGAIN = 0.057 e-/stored ADU
+corresponds to **0.91 e-/true 12-bit ADU**, consistent with the ZWO spec (0.940
+e-/ADU at gain = 200, HCG; Lou Broad, priv. comm.).  Derived from T_tel
+self-consistency; pending confirmation by photon transfer curve from flat-field
+pairs.
 
-The lower IR transmissivity is expected: aged aluminium reflectivity declines
-in the near-IR.
-
-Two stars were excluded from the summary statistics:
+Stars are flagged reliable if the sky annulus inner radius ≥ 3 × Moffat FWHM
+(β = 3.0); unreliable stars are excluded from summary statistics. Two additional
+stars were excluded by name:
 
 - **G2P1190R** (Teff = 4776 K, bp_rp = 1.52): very red star; luminance band
   samples the suppressed blue side of the SED, giving unreliable T_tel in
