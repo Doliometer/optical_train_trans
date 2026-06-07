@@ -68,7 +68,7 @@ Both results fall within their respective expected ranges. Full output in
 \* The camera stores 12-bit ADC values left-shifted by 4 bits into 16-bit FITS
 pixels (bias pedestal ~80 stored ADU = 5 true ADU). EGAIN = 0.057 e-/stored ADU
 corresponds to **0.91 e-/true 12-bit ADU**, consistent with the ZWO spec (0.940
-e-/ADU at gain = 200, HCG; Lou Broad, priv. comm.).  Derived from T_tel
+e-/ADU at gain = 200, HCG; Lou Jackson, priv. comm.).  Derived from T_tel
 self-consistency; pending confirmation by photon transfer curve from flat-field
 pairs.
 
@@ -133,7 +133,7 @@ python3 growth_moffat.py
 ## Data
 
 FITS frames (1000 per star per filter, 19 stars, 2 filters) are held on the
-project server and are not included in this repository.
+Stelar-group data server and are not included in this repository.
 
 ## Next steps
 
