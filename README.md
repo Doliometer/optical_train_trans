@@ -140,4 +140,5 @@ Stelar-group data server and are not included in this repository.
 - Photon transfer curve from flat-field pairs to confirm EGAIN independently
 - Extend pipeline to the MWO Hale 60-inch telescope
 - Cross-check Baader 685 IR filter curve against manufacturer data
-  (implied EGAIN from IR band is ~60% higher than from luminance)
+  (implied EGAIN from both bands now agrees at ~0.054 e-/ADU when the
+  per-filter mirror-budget midpoint is used as the reference T_tel)
