@@ -311,7 +311,6 @@ def main():
     print(f'  Expected T_tel (IR longpass, 685–1050 nm): {T_TEL_IR_LO:.3f} – {T_TEL_IR_HI:.3f}  '
           f'(Al reflectivity from Rakić 1995)')
 
-    target_t = 0.50
     for fname in FILTER_CONFIG:
         rows_all      = [r for r in results if r['filter'] == fname]
         rows_reliable = [r for r in rows_all
@@ -330,13 +329,24 @@ def main():
               f'({n_xp} XP, {len(finite)-n_xp} Planck,  '
               f'{n_unreliable} unreliable, {n_excluded} excluded){tag}')
         if len(finite):
-            print(f'    median T_tel = {np.nanmedian(finite):.3f}')
-            print(f'    mean   T_tel = {np.nanmean(finite):.3f}  ±  {np.nanstd(finite):.3f}')
+            median_t = np.nanmedian(finite)
+            mean_t   = np.nanmean(finite)
+            print(f'    median T_tel = {median_t:.3f}')
+            print(f'    mean   T_tel = {mean_t:.3f}  ±  {np.nanstd(finite):.3f}')
             print(f'    range        = {finite.min():.3f} – {finite.max():.3f}')
-            impl_eg = [EGAIN * target_t / r['t_tel']
-                       for r in rows_use if np.isfinite(r['t_tel'])]
-            print(f'    Implied EGAIN for T_tel={target_t:.2f}: '
-                  f'{np.median(impl_eg):.4f} e-/ADU  (used: {EGAIN:.4f})')
+            # Implied EGAIN: the value that would make the median T_tel equal to
+            # the midpoint of the expected range for this filter.
+            if fname == 'luminance':
+                t_mid = (T_TEL_LO + T_TEL_HI) / 2
+            else:
+                t_mid = (T_TEL_IR_LO + T_TEL_IR_HI) / 2
+            egain_implied = EGAIN * median_t / t_mid
+            print(f'    Implied EGAIN for T_tel={t_mid:.3f} (mid expected range): '
+                  f'{egain_implied:.4f} e-/ADU  (used: {EGAIN:.4f})')
+            if fname == 'luminance':
+                print(f'    Note: EGAIN={EGAIN:.4f} was set so that luminance T_tel '
+                      f'falls within the expected mirror-budget range '
+                      f'({T_TEL_LO:.3f}–{T_TEL_HI:.3f}).')
 
 
 if __name__ == '__main__':

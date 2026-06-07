@@ -90,10 +90,11 @@ _c1_ref_G2P1234R          ir_longpass   9.87  14873 XP        1,359,936    4,292
     median T_tel = 0.471
     mean   T_tel = 0.472  ±  0.007
     range        = 0.462 – 0.482
-    Implied EGAIN for T_tel=0.50: 0.0604 e-/ADU  (used: 0.0570)
+    Implied EGAIN for T_tel=0.498 (mid expected range): 0.0540 e-/ADU  (used: 0.0570)
+    Note: EGAIN=0.0570 was set so that luminance T_tel falls within the expected mirror-budget range (0.428–0.568).
 
   IR_LONGPASS  n=7 used  (7 XP, 0 Planck,  11 unreliable, 1 excluded)
     median T_tel = 0.312
     mean   T_tel = 0.313  ±  0.008
     range        = 0.301 – 0.329
-    Implied EGAIN for T_tel=0.50: 0.0914 e-/ADU  (used: 0.0570)
+    Implied EGAIN for T_tel=0.330 (mid expected range): 0.0539 e-/ADU  (used: 0.0570)
