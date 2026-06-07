@@ -1,0 +1,99 @@
+In preparation for Gaia DR4, the Gaia archive is in evolution. Unfortunately, it may be unstable at times and particular types of queries may time out. Please consider registering for a user account (https://www.cosmos.esa.int/web/gaia-users/register). For questions or advice, please contact the Gaia helpdesk (https://www.cosmos.esa.int/web/gaia/gaia-helpdesk).
+Found 19 star directories.
+Querying Gaia DR3 … done (19 rows).
+Fetching XP spectra for 17 stars … done (17 spectra).
+
+Star                      Filter           G   Teff SED         Obs e/s     Pred e/s   T_tel  FWHM"  ok?
+----------------------------------------------------------------------------------------------------
+  Registering 1000 frames … done.  centroid=(516,529)
+_c1_ref_G2P1030R          luminance     9.25   9620 XP       11,461,520   24,341,413   0.471   1.17  yes
+  Registering 1000 frames … done.  centroid=(534,561)
+_c1_ref_G2P1030R          ir_longpass   9.25   9620 XP        2,493,637    7,583,685   0.329   1.05  yes
+  Registering 1000 frames … done.  centroid=(374,546)
+_c1_ref_G2P1060R          luminance     9.07   6115 XP       11,661,233   24,213,571   0.482   1.32  yes
+  Registering 1000 frames … done.  centroid=(325,570)
+_c1_ref_G2P1060R          ir_longpass   9.07   6115 XP        3,822,328   12,352,475   0.309   1.13  yes
+  Registering 1000 frames … done.  centroid=(389,567)
+_c1_ref_G2P1068R          luminance    10.62    nan XP        3,056,035    6,613,473   0.462   1.42  yes
+  Registering 1000 frames … done.  centroid=(350,578)
+_c1_ref_G2P1068R          ir_longpass  10.62    nan XP          740,501    2,350,233   0.315   1.10  yes
+  Registering 1000 frames … done.  centroid=(217,529)
+_c1_ref_G2P1079R          luminance    10.38   6376 XP        2,376,041    7,258,140   0.327   1.28   NO
+  Registering 1000 frames … done.  centroid=(205,573)
+_c1_ref_G2P1079R          ir_longpass  10.38   6376 XP          452,987    3,658,109   0.124   1.07   NO
+  Registering 1000 frames … done.  centroid=(418,541)
+_c1_ref_G2P1085R          luminance     8.87    nan XP       11,888,197   24,388,288   0.487   1.78   NO
+  Registering 1000 frames … done.  centroid=(391,543)
+_c1_ref_G2P1085R          ir_longpass   8.87    nan XP        5,897,917   19,098,803   0.309   1.24  yes
+  Registering 1000 frames … done.  centroid=(197,571)
+_c1_ref_G2P1096R          luminance    10.99    nan XP          598,693    3,360,522   0.178   1.39   NO
+  Registering 1000 frames … done.  centroid=(155,585)
+_c1_ref_G2P1096R          ir_longpass  10.99    nan XP          158,637    2,765,769   0.057   1.07   NO
+  Registering 1000 frames … done.  centroid=(308,490)
+_c1_ref_G2P1100R          luminance    10.78   5591 XP        2,155,497    4,548,016   0.474   1.68   NO
+  Registering 1000 frames … done.  centroid=(284,522)
+_c1_ref_G2P1100R          ir_longpass  10.78   5591 XP          879,359    2,924,674   0.301   1.33  yes
+  Registering 1000 frames … done.  centroid=(348,452)
+_c1_ref_G2P1110R          luminance    10.50   6299 XP        1,804,276    6,354,038   0.284   2.03   NO
+  Registering 1000 frames … done.  centroid=(229,449)
+_c1_ref_G2P1110R          ir_longpass  10.50   6299 XP        1,201,639    3,419,641   0.351   1.55   NO
+  Registering 1000 frames … done.  centroid=(336,490)
+_c1_ref_G2P1128R          luminance     9.07   6485 XP       11,695,911   24,775,849   0.472   1.42  yes
+  Registering 1000 frames … done.  centroid=(332,521)
+_c1_ref_G2P1128R          ir_longpass   9.07   6485 XP        3,698,002   11,857,933   0.312   1.22  yes
+  Registering 1000 frames … done.  centroid=(640,324)
+_c1_ref_G2P1135R          luminance    10.91   5928 XP        2,063,636    4,324,082   0.477   1.54   NO
+  Registering 1000 frames … done.  centroid=(589,343)
+_c1_ref_G2P1135R          ir_longpass  10.91   5928 XP          743,151    2,370,767   0.313   1.39  yes
+  Registering 1000 frames … done.  centroid=(310,455)
+_c1_ref_G2P1158R          luminance     9.05   7153 Planck   12,246,599   24,593,616   0.498   1.73   NO
+  Registering 1000 frames … done.  centroid=(299,424)
+_c1_ref_G2P1158R          ir_longpass   9.05   7153 Planck    3,458,877   11,537,069   0.300   1.49   NO
+  Registering 1000 frames … done.  centroid=(351,511)
+_c1_ref_G2P1164R          luminance    10.55   5462 XP        2,683,226    5,777,908   0.464   1.85   NO
+  Registering 1000 frames … done.  centroid=(279,523)
+_c1_ref_G2P1164R          ir_longpass  10.55   5462 XP          973,452    3,485,853   0.279   1.61   NO
+  Registering 1000 frames … done.  centroid=(387,519)
+_c1_ref_G2P1168R          luminance    10.56   6242 XP        2,751,524    5,991,209   0.459   1.87   NO
+  Registering 1000 frames … done.  centroid=(374,569)
+_c1_ref_G2P1168R          ir_longpass  10.56   6242 XP          961,235    3,195,085   0.301   1.49   NO
+  Registering 1000 frames … done.  centroid=(423,399)
+_c1_ref_G2P1170R          luminance    10.95   7594 Planck    2,514,915    4,389,577   0.573   1.68  yes
+  Registering 1000 frames … done.  centroid=(396,406)
+_c1_ref_G2P1170R          ir_longpass  10.95   7594 Planck    2,294,068    1,930,929   1.188   1.43  yes
+  Registering 1000 frames … done.  centroid=(315,689)
+_c1_ref_G2P1182R          luminance    10.48   4678 XP        2,473,854    4,895,310   0.505   1.93   NO
+  Registering 1000 frames … done.  centroid=(298,694)
+_c1_ref_G2P1182R          ir_longpass  10.48   4678 XP        1,411,042    4,924,804   0.287   1.66   NO
+  Registering 1000 frames … done.  centroid=(427,592)
+_c1_ref_G2P1190R          luminance     9.16   4776 XP        2,345,662   16,062,967   0.146   1.87   NO
+  Registering 1000 frames … done.  centroid=(421,665)
+_c1_ref_G2P1190R          ir_longpass   9.16   4776 XP          805,286   17,171,404   0.047   1.46   NO
+  Registering 1000 frames … done.  centroid=(318,438)
+_c1_ref_G2P1200R          luminance    10.79   4739 XP        1,505,558    3,083,496   0.488   1.97   NO
+  Registering 1000 frames … done.  centroid=(346,446)
+_c1_ref_G2P1200R          ir_longpass  10.79   4739 XP        1,164,452    4,221,639   0.276   1.67   NO
+  Registering 1000 frames … done.  centroid=(485,572)
+_c1_ref_G2P1207R          luminance    10.76    nan XP        2,373,739    4,806,219   0.494   2.15   NO
+  Registering 1000 frames … done.  centroid=(482,567)
+_c1_ref_G2P1207R          ir_longpass  10.76    nan XP          898,155    2,900,850   0.310   2.05   NO
+  Registering 1000 frames … done.  centroid=(575,566)
+_c1_ref_G2P1234R          luminance     9.87  14873 XP        6,132,701   13,338,532   0.460   2.30   NO
+  Registering 1000 frames … done.  centroid=(562,597)
+_c1_ref_G2P1234R          ir_longpass   9.87  14873 XP        1,359,936    4,292,957   0.317   2.05   NO
+------------------------------------------------------------------------------------------
+
+  Expected T_tel (luminance, 400–710 nm): 0.428 – 0.568  (1×Al fresh + 4×Al aged + 1×Ag + lens)
+  Expected T_tel (IR longpass, 685–1050 nm): 0.280 – 0.379  (Al reflectivity from Rakić 1995)
+
+  LUMINANCE  n=4 used  (4 XP, 0 Planck,  14 unreliable, 1 excluded)
+    median T_tel = 0.471
+    mean   T_tel = 0.472  ±  0.007
+    range        = 0.462 – 0.482
+    Implied EGAIN for T_tel=0.50: 0.0604 e-/ADU  (used: 0.0570)
+
+  IR_LONGPASS  n=7 used  (7 XP, 0 Planck,  11 unreliable, 1 excluded)
+    median T_tel = 0.312
+    mean   T_tel = 0.313  ±  0.008
+    range        = 0.301 – 0.329
+    Implied EGAIN for T_tel=0.50: 0.0914 e-/ADU  (used: 0.0570)
