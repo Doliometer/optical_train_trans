@@ -43,7 +43,14 @@ The Hooker speckle train passes light through 6 mirrors and 1 relay lens:
 | Relay refractor lens | — | broadband AR coated |
 | Final fold before camera | Ag | manufacturer spec ~98% |
 
-Expected T_tel: **0.43 – 0.57**
+Expected T_tel:
+
+| Passband | Range | Basis |
+|---|---|---|
+| Luminance (400–710 nm) | **0.43 – 0.57** | Al reflectivity ~91% (fresh), ~85–90% (aged) |
+| IR longpass (685–1050 nm) | **0.28 – 0.38** | Al reflectivity ~84% (fresh), ~78–83% (aged) at ~850 nm effective wavelength (Rakić 1995) |
+
+Al reflectivity declines significantly in the near-IR, driving the lower expected range for the IR passband.
 
 ## Results (2025-10-16)
 
