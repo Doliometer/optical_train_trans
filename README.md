@@ -26,6 +26,14 @@ predicted e-/s = ∫ F_λ(λ) · A_tel · T_atm(λ) · QE(λ) · T_filter(λ) d�
 | `QE(λ)` | — | Detector quantum efficiency of the ZWO ASI585MM Pro, digitised from the manufacturer's published curve. |
 | `T_filter(λ)` | — | Filter transmission, digitised from Baader manufacturer curves (UV/IR-cut L or 685 IR-pass). |
 
+The integral yields a predicted rate in photo-electrons per second (e-/s):
+each photon that reaches the detector has a wavelength-dependent probability
+QE(λ) of liberating one electron from the silicon, and the integral sums
+those probabilities weighted by the incoming photon flux. The observed e-/s
+is obtained from the measured pixel counts — in ADU (Analog-to-Digital Units,
+the integer values stored in the FITS file) — by multiplying by EGAIN
+(electrons per ADU) and dividing by the exposure time.
+
 `T_tel` absorbs all throughput not otherwise accounted for: mirror
 reflectivities, spider obscuration losses, relay optics, and any vignetting.
 
@@ -52,25 +60,42 @@ Expected T_tel:
 
 Al reflectivity declines significantly in the near-IR, driving the lower expected range for the IR passband.
 
+## Camera calibration — EGAIN
+
+ADU (Analog-to-Digital Unit) is the integer count reported by the camera.
+The on-chip ADC produces a 12-bit integer (true ADU, range 0–4095). The ZWO
+driver left-shifts this by 4 bits before writing to the FITS file, so the
+stored value is always a multiple of 16 (stored ADU, range 0–65520). One
+true ADU therefore equals 16 stored ADU. The bias pedestal is ~942 stored ADU
+(~59 true ADU). EGAIN is expressed in stored units throughout the pipeline.
+
+**Photon transfer curve (PTC):** 10 flat pairs at GAIN=252 in darkness, battery-powered
+LED, exposure times 0.005–0.050 s:
+
+| | |
+|---|---|
+| EGAIN | **0.0303 ± 0.0001 e-/stored ADU** (std/mean < 0.4%) |
+| True EGAIN | 0.0303 × 16 = **0.485 e-/true 12-bit ADU** |
+| Lou Jackson (priv. comm.) | 0.493–0.495 e-/true ADU at GAIN=252, HCG, 0–15°C |
+
+FITS header EGAIN values are unreliable (ZWO SDK inconsistency) and should not be used.
+
 ## Results (2025-10-16)
 
-Camera: ZWO ASI585MM Pro · GAIN = 252 (HCG mode) · EGAIN = 0.057 e-/stored ADU\*
+Camera: ZWO ASI585MM Pro · GAIN = 252 (HCG mode) · EGAIN = 0.0303 e-/stored ADU
 Plate scale: 18.63 mas/px · Frame size: 1024 × 1024 · 1000 frames/star/filter
 
 | Filter | Bandpass | Expected T_tel | n stars | T_tel (median) | T_tel (mean ± std) |
 |---|---|---|---|---|---|
-| Baader UV/IR-cut L | 400–710 nm | 0.43 – 0.57 | 4 | 0.471 | 0.472 ± 0.007 |
-| Baader 685 IR-pass | 685–1050 nm | 0.28 – 0.38 | 7 | 0.312 | 0.313 ± 0.008 |
+| Baader UV/IR-cut L | 400–710 nm | 0.43 – 0.57 | 4 | 0.251 | 0.251 ± 0.004 |
+| Baader 685 IR-pass | 685–1050 nm | 0.28 – 0.38 | 7 | 0.166 | 0.166 ± 0.004 |
 
-Both results fall within their respective expected ranges. Full output in
+Both results fall well below their respective expected ranges — roughly a factor of
+2. The implied EGAIN to bring T_tel up to the mirror-budget midpoint is ~0.015
+e-/stored ADU for both bands, inconsistent with the PTC. The discrepancy points to
+unaccounted throughput losses in the optical train (spider vignetting, relay optics,
+actual mirror reflectivities lower than budget values). Full output in
 `survey_results.txt`. Runtime: ~81 minutes.
-
-\* The camera stores 12-bit ADC values left-shifted by 4 bits into 16-bit FITS
-pixels (bias pedestal ~80 stored ADU = 5 true ADU). EGAIN = 0.057 e-/stored ADU
-corresponds to **0.91 e-/true 12-bit ADU**, consistent with the ZWO spec (0.940
-e-/ADU at gain = 200, HCG; Lou Jackson, priv. comm.).  Derived from T_tel
-self-consistency; pending confirmation by photon transfer curve from flat-field
-pairs.
 
 Stars are flagged reliable if the sky annulus inner radius ≥ 3 × Moffat FWHM
 (β = 3.0); unreliable stars are excluded from summary statistics. Two additional
@@ -137,8 +162,7 @@ Stelar-group data server and are not included in this repository.
 
 ## Next steps
 
-- Photon transfer curve from flat-field pairs to confirm EGAIN independently
+- Investigate factor-of-2 shortfall in T_tel relative to mirror budget:
+  spider vignetting, relay optics losses, actual mirror reflectivities
+- Cross-check Baader filter curves against manufacturer data
 - Extend pipeline to the MWO Hale 60-inch telescope
-- Cross-check Baader 685 IR filter curve against manufacturer data
-  (implied EGAIN from both bands now agrees at ~0.054 e-/ADU when the
-  per-filter mirror-budget midpoint is used as the reference T_tel)

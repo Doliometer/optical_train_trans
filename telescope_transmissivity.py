@@ -72,26 +72,21 @@ T_TEL_IR_LO = R_AL_PRIMARY_IR * R_AL_AGED_IR_LO**N_AL_AGED * R_AG * T_LENS_LO
 T_TEL_IR_HI = R_AL_PRIMARY_IR * R_AL_AGED_IR_HI**N_AL_AGED * R_AG * T_LENS_HI
 
 # Camera
-# EGAIN: header reports 0.5166 e-/ADU, which matches the ZWO chart at gain~195 (0.1dB units).
-# The data were taken at GAIN=252 (0.1dB units), which is in the HCG regime.
-# Reading from the ZWO ASI585MM spec chart (asi585spec.webp) at gain=252:
-#   EGAIN(chart) ≈ 0.30 e-/ADU
-#   full-well     ≈ 1050 e-  →  EGAIN = 1050/4095 ≈ 0.256 e-/ADU
-# Best estimate: 0.28 e-/ADU (midpoint).  Header value appears to be incorrect.
 # The ZWO ASI585MM Pro records 12-bit ADC values left-shifted by 4 bits into
 # 16-bit FITS pixels (all stored values are multiples of 16).  The pipeline
 # works entirely in stored 16-bit ADU throughout (sky subtraction removes the
-# bias pedestal of ~80 stored ADU = 5 true ADU), so EGAIN is expressed in the
-# same stored units.
+# bias pedestal; ~942 stored ADU = ~59 true ADU), so EGAIN is expressed in
+# stored units.
 #
-# Stored EGAIN = 0.057 e-/stored ADU
-# True EGAIN   = 0.057 × 16 = 0.91 e-/true 12-bit ADU  (consistent with HCG
-#                at gain=252 on the ZWO spec chart)
+# Stored EGAIN = 0.0303 e-/stored ADU
+# True EGAIN   = 0.0303 × 16 = 0.485 e-/true 12-bit ADU
 #
-# Derived from T_tel self-consistency: luminance-band median T_tel = 0.480
-# with EGAIN=0.057 falls squarely in the expected 0.43–0.57 range.
-# Pending confirmation by photon transfer curve from flat-field pairs.
-EGAIN = 0.057  # e-/stored 16-bit ADU
+# Measured by photon transfer curve from flat-field pairs taken at GAIN=252
+# in darkness (10 exposure levels, 0.005–0.050s); EGAIN = 0.0303 ± 0.0001
+# e-/stored ADU across all levels (std/mean < 0.4%).
+# Consistent with Lou Jackson (priv. comm.): 0.493–0.495 e-/true ADU at
+# GAIN=252, HCG mode, 0–15°C.
+EGAIN = 0.0303  # e-/stored 16-bit ADU
 
 # Plate scale
 PLATE_SCALE_MAS = 18.63     # mas/pixel

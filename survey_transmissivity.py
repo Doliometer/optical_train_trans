@@ -20,6 +20,7 @@ from astropy.io import fits
 from pathlib import Path
 import glob
 import re
+import pickle
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -40,6 +41,8 @@ from telescope_transmissivity import (
 
 BASE_DIR = Path('.')        # directory containing all G2P*_ folders
 N_STACK  = None             # frames per filter (None = all)
+GAIA_CACHE    = Path('gaia_cache.pkl')   # cached Gaia photometry query
+XP_CACHE      = Path('xp_cache.pkl')    # cached XP sampled spectra
 
 # Stars excluded from T_tel summary statistics (but still processed and printed):
 #   G2P1190R: very red star (bp_rp=1.52, Teff=4776K); XP flux suppressed in
@@ -230,15 +233,31 @@ def main():
         if sid and sid not in source_ids:
             source_ids.append(sid)
 
-    # Gaia photometry + XP availability
-    gaia_params = query_gaia_stars(source_ids)
+    # Gaia photometry + XP availability (use cache if present)
+    if GAIA_CACHE.exists():
+        print(f'Loading Gaia photometry from cache ({GAIA_CACHE}) …')
+        with open(GAIA_CACHE, 'rb') as f:
+            gaia_params = pickle.load(f)
+    else:
+        gaia_params = query_gaia_stars(source_ids)
+        with open(GAIA_CACHE, 'wb') as f:
+            pickle.dump(gaia_params, f)
+        print(f'Gaia photometry cached to {GAIA_CACHE}.')
     # Inject source_id into each param dict for lookup in predicted_electrons_per_sec
     for sid, gp in gaia_params.items():
         gp['source_id'] = sid
 
-    # Batch fetch XP spectra
+    # Batch fetch XP spectra (use cache if present)
     xp_ids = [sid for sid, gp in gaia_params.items() if gp['has_xp']]
-    xp_spectra = fetch_xp_spectra(xp_ids) if xp_ids else {}
+    if GAIA_CACHE.exists() and XP_CACHE.exists():
+        print(f'Loading XP spectra from cache ({XP_CACHE}) …')
+        with open(XP_CACHE, 'rb') as f:
+            xp_spectra = pickle.load(f)
+    else:
+        xp_spectra = fetch_xp_spectra(xp_ids) if xp_ids else {}
+        with open(XP_CACHE, 'wb') as f:
+            pickle.dump(xp_spectra, f)
+        print(f'XP spectra cached to {XP_CACHE}.')
 
     # -----------------------------------------------------------------------
     # Per-star, per-filter analysis
