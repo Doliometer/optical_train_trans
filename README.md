@@ -119,6 +119,7 @@ stars were excluded by name:
 | `moffat_fit.py` | Seeing disk characterisation across a random sample of stars |
 | `plot_xp_outliers.py` | Diagnostic XP spectrum plots for excluded outlier stars |
 | `plot_tatm.py` | Atmospheric transmission model: component breakdown and filter × QE × T_atm integrand weights |
+| `plot_ptc.py` | Photon transfer curve: shot-noise variance vs signal and EGAIN vs exposure time |
 
 ## Dependencies
 
