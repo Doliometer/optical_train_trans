@@ -38,8 +38,8 @@ fig, axes = plt.subplots(2, 1, figsize=(9, 8), sharex=True)
 
 # --- Top panel: T_atm and components -------------------------------------
 ax = axes[0]
-ax.plot(lam, T_tot1,  'k',   lw=2,   label='$T_{atm}$ total  (X=1.0)')
-ax.plot(lam, T_tot15, 'k--', lw=1.5, label='$T_{atm}$ total  (X=1.5)')
+ax.plot(lam, T_tot1,  'k',   lw=2,   label='$T_{atm}$ total  (airmass=1.0)')
+ax.plot(lam, T_tot15, 'k--', lw=1.5, label='$T_{atm}$ total  (airmass=1.5)')
 ax.plot(lam, T_ray,  color='steelblue',  lw=1, ls=':', label='Rayleigh')
 ax.plot(lam, T_aer,  color='sienna',     lw=1, ls=':', label='Aerosol')
 ax.plot(lam, T_oz,   color='olive',      lw=1, ls=':', label='Ozone (Chappuis)')
@@ -78,15 +78,15 @@ ax2.set_xlabel('Wavelength (nm)', fontsize=11)
 ax2.set_ylabel('Fraction', fontsize=11)
 ax2.set_ylim(0, 1.05)
 ax2.legend(fontsize=8, loc='upper right')
-ax2.set_title('Integrand weights: filter × QE × $T_{atm}$  (X=1.0)', fontsize=11)
+ax2.set_title('Integrand weights: filter × QE × $T_{atm}$  (airmass=1.0)', fontsize=11)
 ax2.grid(True, alpha=0.3)
 
 # Representative T_atm values as a text table in the top panel
 rows = [330, 400, 450, 500, 550, 600, 650, 700, 750, 800, 900, 1000]
 t1_vals  = atmospheric_transmission(np.array(rows, float), airmass=1.0)
 t15_vals = atmospheric_transmission(np.array(rows, float), airmass=1.5)
-table_str = 'λ(nm)  X=1.0  X=1.5\n' + '\n'.join(
-    f'{r:5d}  {t1:.3f}  {t15:.3f}' for r, t1, t15 in zip(rows, t1_vals, t15_vals))
+table_str = 'λ(nm)  am=1.0  am=1.5\n' + '\n'.join(
+    f'{r:5d}  {t1:.3f}   {t15:.3f}' for r, t1, t15 in zip(rows, t1_vals, t15_vals))
 axes[0].text(0.013, 0.03, table_str, transform=axes[0].transAxes,
              fontsize=6.5, family='monospace', verticalalignment='bottom',
              bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
